@@ -11,7 +11,7 @@
  * @argv: args vector
  * Return: 0 all time
  */
-int main(int argc, char *argv[])
+int main(int __attribute__((unused)) argc, char *argv[])
 {
 	char *argvv[2];
 	char *line = NULL;
@@ -21,7 +21,9 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		printf("#cisfun$ ");
-		getline(&line, &n, stdin);
+		if (getline(&line, &n, stdin) == -1)
+			break;
+
 		line[strcspn(line, "\n")] = '\0';
 		argvv[0] = line;
 		argvv[1] = NULL;
