@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <sys/types.h>
-
+#include "shell.h"
 /**
  * main - UNIX command line interpreter.
  * @argc: arg count
@@ -20,20 +14,30 @@ int main(int __attribute__((unused)) argc, char *argv[])
 
 	while (1)
 	{
-		printf("#cisfun$ ");
-		fflush(stdout);
+		if (isatty(STDIN_FILENO))
+			printf("#cisfun$ ");
 		if (getline(&line, &n, stdin) == -1)
+		{
+			printf("#cisfun$ ");
 			break;
+		}
 
-		line[strcspn(line, "\n")] = '\0';
-		argvv[0] = line;
+		argvv[0] = strtok(line, " \n");
+		if (!argvv[0])
+			exit(0);
 		argvv[1] = NULL;
+
 		id = fork();
+		if (id == -1)
+			exit(1);
+
 		if (id == 0)
 		{
-			if (execve(argvv[0], argvv, NULL) == -1)
+			if (execve(argvv[0], argvv, environ) == -1)
 			{
-				fprintf(stderr, "%s: No such file or directory\n", argv[0]);
+				_puts(argv[0]);
+				_puts(": ");
+				perror("");
 			}
 		}
 		else
