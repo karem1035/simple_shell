@@ -9,6 +9,7 @@
 #include <sys/types.h>
 
 extern char **environ;
+void execute(char *argvv[]);
 
 
 void _puts(char *str);

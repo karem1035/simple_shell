@@ -1,16 +1,13 @@
 #include "shell.h"
 /**
  * main - UNIX command line interpreter.
- * @argc: arg count
- * @argv: args vector
  * Return: 0 all time
  */
-int main(int __attribute__((unused)) argc, char *argv[])
+int main(void)
 {
 	char *argvv[2];
 	char *line = NULL;
 	size_t n = 0;
-	int id, stat;
 
 	while (1)
 	{
@@ -27,23 +24,8 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			exit(0);
 		argvv[1] = NULL;
 
-		id = fork();
-		if (id == -1)
-			exit(1);
-
-		if (id == 0)
-		{
-			if (execve(argvv[0], argvv, environ) == -1)
-			{
-				_puts(argv[0]);
-				_puts(": ");
-				perror("");
-			}
-		}
-		else
-			wait(&stat);
+		execute(argvv);
 	}
-
 	free(line);
 	return (0);
 }
