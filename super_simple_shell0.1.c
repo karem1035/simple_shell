@@ -21,6 +21,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	while (1)
 	{
 		printf("#cisfun$ ");
+		fflush(stdout);
 		if (getline(&line, &n, stdin) == -1)
 			break;
 
