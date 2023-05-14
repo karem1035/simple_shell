@@ -15,10 +15,10 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			printf("#cisfun$ ");
+			_puts("#cisfun$ ");
 		if (getline(&line, &n, stdin) == -1)
 		{
-			printf("#cisfun$ ");
+			_puts("#cisfun$ ");
 			break;
 		}
 
