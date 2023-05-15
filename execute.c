@@ -19,6 +19,7 @@ void execute(char *argvv[])
 			_puts(argvv[0]);
 			_puts(": ");
 			perror("");
+			exit(1);
 		}
 	}
 	else
