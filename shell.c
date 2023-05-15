@@ -1,9 +1,11 @@
 #include "shell.h"
 /**
  * main - UNIX command line interpreter.
+ * @argc: number of arguments.
+ * @argv: array of arguments.
  * Return: 0 all time
  */
-int main(void)
+int main(int __attribute__((unused)) argc, char *argv[])
 {
 	char *argvv[20];
 	char *line = NULL;
@@ -29,7 +31,6 @@ int main(void)
 				break;
 			}
 		}
-
 		line = strtok(line, " \n");
 		token = strtok(line, " ");
 		argvv[0] = token;
@@ -41,8 +42,7 @@ int main(void)
 			argvv[i] = token;
 		}
 		argvv[i] = NULL;
-
-		execute(argvv);
+		execute(argv[0], argvv);
 	}
 	free(line);
 	return (0);
