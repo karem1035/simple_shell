@@ -19,6 +19,7 @@ void execute(char *argv, char *argvv[])
 		if (execve(argvv[0], argvv, environ) == -1)
 		{
 			write(STDOUT_FILENO, filename, _strlen(filename));
+			write(STDOUT_FILENO, ": ", 2);
 			perror("");
 			exit(1);
 		}
