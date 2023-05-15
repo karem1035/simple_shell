@@ -21,7 +21,7 @@ int main(void)
 			{
 				if (!isatty(STDIN_FILENO))
 					_puts("#cisfun$ ");
-				else 
+				else
 					_putchar('\n');
 				break;
 			}
