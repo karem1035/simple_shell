@@ -15,13 +15,21 @@ int main(void)
 			_puts("#cisfun$ ");
 		if (getline(&line, &n, stdin) == -1)
 		{
-			_puts("#cisfun$ ");
-			break;
+			if (line[0] == '\n')
+				continue;
+			else
+			{
+				if (!isatty(STDIN_FILENO))
+					_puts("#cisfun$ ");
+				else 
+					_putchar('\n');
+				break;
+			}
 		}
 
 		argvv[0] = strtok(line, " \n");
 		if (!argvv[0])
-			exit(0);
+			continue;
 		argvv[1] = NULL;
 
 		execute(argvv);
