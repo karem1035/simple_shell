@@ -7,20 +7,18 @@
 void execute(char *argvv[])
 {
 	int id, stat;
-
+	char *filename = argvv[0];
+	
 	id = fork();
 	if (id == -1)
 		exit(1);
 
 	if (id == 0)
 	{
-		if (execve(argvv[0], argvv, environ) == -1)
-		{
-			_puts(argvv[0]);
-			_puts(": ");
-			perror("");
-			exit(1);
-		}
+		execve(argvv[0], argvv, environ);
+		write(STDOUT_FILENO, filename, strlen(filename));
+		perror(" ");
+		exit(1);
 	}
 	else
 	{
