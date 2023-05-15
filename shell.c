@@ -5,9 +5,12 @@
  */
 int main(void)
 {
-	char *argvv[2];
+	char *argvv[20];
 	char *line = NULL;
+	char *token;
+	char delim[] = " ";
 	size_t n = 0;
+	int i = 0;
 
 	while (1)
 	{
@@ -27,10 +30,17 @@ int main(void)
 			}
 		}
 
-		argvv[0] = strtok(line, " \n");
+		line = strtok(line, " \n");
+		token = strtok(line, " ");
+		argvv[0] = token;
 		if (!argvv[0])
 			continue;
-		argvv[1] = NULL;
+		for (i = 1; argvv[i] && i < 19; i++)
+		{
+			token = strtok(NULL, delim);
+			argvv[i] = token;
+		}
+		argvv[i] = NULL;
 
 		execute(argvv);
 	}
