@@ -1,26 +1,24 @@
 #include "shell.h"
 /**
  * execute - execute programm.
- * @argvv: the executable command.
- * @argv: name of the file.
+ * @filename: the file name.
+ * @argvv: the commands.
  * Return: void.
  */
-void execute(char *argv, char *argvv[])
+void execute(char *filename, char *argvv[])
 {
-	int id, stat;
-	char *filename = argv;
+	int stat;
+	pid_t pid;
 
-	id = fork();
-	if (id == -1)
+	pid = fork();
+	if (pid == -1)
 		exit(1);
 
-	if (id == 0)
+	if (pid == 0)
 	{
 		if (execve(argvv[0], argvv, environ) == -1)
 		{
-			write(STDOUT_FILENO, filename, _strlen(filename));
-			write(STDOUT_FILENO, ": ", 2);
-			perror("");
+			perror(filename);
 			exit(1);
 		}
 	}
@@ -29,24 +27,4 @@ void execute(char *argv, char *argvv[])
 		wait(&stat);
 	}
 
-}
-/**
- * _strlen - calulates the length of string.
- * @s: string inut.
- *
- * Description: takes string as parameter input,
- * loops into it to calculate its length.
- * Return: i - integer with the length value.
- */
-
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-
-	return (i);
 }

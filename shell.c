@@ -7,39 +7,27 @@
  */
 int main(int __attribute__((unused)) argc, char *argv[])
 {
-	char *argvv[20];
+	char *argvv[20], *token;
 	char *line = NULL;
-	char *token;
-	char delim[] = " ";
 	size_t n = 0;
-	int i = 0;
+	int i;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			_puts("#cisfun$ ");
+			write(1, "$$ ", 3);
 		if (getline(&line, &n, stdin) == -1)
 		{
-			if (line[0] == '\n')
-				continue;
-			else
-			{
-				if (!isatty(STDIN_FILENO))
-					_puts("#cisfun$ ");
-				else
-					_putchar('\n');
-				break;
-			}
+			perror("getline error.");
+			break;
 		}
-		line = strtok(line, " \n");
-		token = strtok(line, " ");
-		argvv[0] = token;
-		if (!argvv[0])
-			continue;
-		for (i = 1; argvv[i] && i < 19; i++)
+		token = strtok(line, " \n");
+		i = 0;
+		while (token)
 		{
-			token = strtok(NULL, delim);
 			argvv[i] = token;
+			token = strtok(NULL, " \n");
+			i++;
 		}
 		argvv[i] = NULL;
 		execute(argv[0], argvv);
