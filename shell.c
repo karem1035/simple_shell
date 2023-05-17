@@ -14,15 +14,24 @@ int main(int __attribute__((unused)) argc, char *argv[])
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
+		if (isatty(0))
 			write(1, "$$ ", 3);
 		if (getline(&line, &n, stdin) == -1)
 		{
-			perror("getline error.");
+			if (!isatty(0))
+				write(1, "$$ ", 3);
+			else
+				write(1, "\n", 1);
 			break;
 		}
 		token = strtok(line, " \n");
 		i = 0;
+		if (!token)
+		{
+			free(line);
+			line = NULL;
+			continue;
+		}
 		while (token)
 		{
 			argvv[i] = token;
@@ -31,7 +40,8 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		}
 		argvv[i] = NULL;
 		execute(argv[0], argvv);
+		n = 0;
+		free(line);
 	}
-	free(line);
 	return (0);
 }
