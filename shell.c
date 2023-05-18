@@ -49,6 +49,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		freeline(line);
 		n = 0;
 	}
+	free(line);
 	return (0);
 }
 /**
