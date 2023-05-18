@@ -87,6 +87,9 @@ int _which(char *argvv[])
 		while (token)
 		{
 			dir = malloc(_strlen(token) + _strlen(argvv[0]) + 2);
+			if (!dir)
+				return (0);
+
 			dir = _strdup(token);
 			_strcat(dir, "/");
 			_strcat(dir, argvv[0]);
