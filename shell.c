@@ -42,6 +42,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		execute(argv[0], argvv);
 		n = 0;
 		free(line);
+		line = NULL;
 	}
 	return (0);
 }
