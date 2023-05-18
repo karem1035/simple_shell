@@ -7,6 +7,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 extern char **environ;
 void execute(char *argv, char *argvv[]);
