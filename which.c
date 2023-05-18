@@ -74,6 +74,12 @@ char *_strcat(char *dest, char *src)
 
 	return (dest);
 }
+/**
+ * _which - search and append command to the suitable directory in
+ * path
+ * @argvv: list of arguments
+ * Return: 1 at success and 0 if failure
+ */
 int _which(char *argvv[])
 {
 	char *dir = NULL;
@@ -82,27 +88,25 @@ int _which(char *argvv[])
 	char delim[] = ":";
 	struct stat sb;
 
+	token = strtok(path, delim);
+	while (token)
+	{
+		dir = malloc(_strlen(token) + _strlen(argvv[0]) + 2);
+		if (!dir)
+			return (0);
 
-		token = strtok(path, delim);
-		while (token)
+		dir = _strdup(token);
+		_strcat(dir, "/");
+		_strcat(dir, argvv[0]);
+		if (stat(dir, &sb) == 0)
 		{
-			dir = malloc(_strlen(token) + _strlen(argvv[0]) + 2);
-			if (!dir)
-				return (0);
-
-			dir = _strdup(token);
-			_strcat(dir, "/");
-			_strcat(dir, argvv[0]);
-			if (stat(dir, &sb) == 0)
-    	    {
-				argvv[0] = dir;
-				execute(argvv);
-				free(dir);
-				return (1);
-    	    }
+			argvv[0] = dir;
+			execute(argvv);
 			free(dir);
-			token = strtok(NULL, delim);
+			return (1);
 		}
-	return 0;
-	
+		free(dir);
+		token = strtok(NULL, delim);
+	}
+	return (0);
 }
