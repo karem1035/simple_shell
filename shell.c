@@ -11,6 +11,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	char *line = NULL;
 	size_t n = 0;
 	int i;
+	struct stat st;
 
 	while (1)
 	{
@@ -39,7 +40,11 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			i++;
 		}
 		argvv[i] = NULL;
-		execute(argv[0], argvv);
+
+		if (stat(argvv[0], &st) == 0)
+			execute(argvv);
+		else if (!_which(argvv))
+			perror(argv[0]);
 		n = 0;
 		free(line);
 		line = NULL;
