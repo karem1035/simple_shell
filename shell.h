@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+struct stat st;
+
+
 extern char **environ;
 void execute(char *argv, char *argvv[]);
 
