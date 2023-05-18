@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * var_len - get the var length.
+ * @environ_i: the var name.
+ * Return: the length.
+ */
 unsigned int var_len(char *environ_i)
 {
 	unsigned int i;
@@ -8,6 +12,11 @@ unsigned int var_len(char *environ_i)
 	;
 	return (i);
 }
+/**
+ * val_len - gets the val length.
+ * @environ_i: the val name.
+ * Return: the length.
+ */
 unsigned int val_len(char *environ_i)
 {
 	unsigned int i;
@@ -38,6 +47,11 @@ int _strcmp(char *s1, char *s2)
 	}
 	return (res);
 }
+/**
+ * _getenv - get the environment variable value.
+ * @name: name of the variable.
+ * Return: the value.
+ */
 char *_getenv(char *name)
 {
 	unsigned int i = 0, j, k;
@@ -62,22 +76,18 @@ char *_getenv(char *name)
 				free(var);
 				return (NULL);
 			}
-
 			j++;
-			for(k = 0; environ[i][j] != '\0'; k++)
+			for (k = 0; environ[i][j] != '\0'; k++)
 			{
 				val[k] = environ[i][j];
 				j++;
 			}
 			val[k] = '\0';
 			free(var);
-			return(val);
+			return (val);
 		}
-		
 		free(var);
 		i++;
 	}
-	
-
 	return (NULL);
 }

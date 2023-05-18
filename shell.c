@@ -29,8 +29,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		i = 0;
 		if (!token)
 		{
-			free(line);
-			line = NULL;
+			freeline(line);
 			continue;
 		}
 		while (token && i < MAX_TOKENS)
@@ -40,14 +39,22 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			i++;
 		}
 		argvv[i] = NULL;
-
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
 			perror(argv[0]);
+		freeline(line);
 		n = 0;
-		free(line);
-		line = NULL;
 	}
 	return (0);
+}
+/**
+ * freeline - frees the line.
+ * @line: the line.
+ * Return: void.
+ */
+void freeline(char *line)
+{
+	line = NULL;
+	free(line);
 }

@@ -21,6 +21,7 @@ unsigned int var_len(char *environ_i);
 unsigned int val_len(char *environ_i);
 int _strcmp(char *s1, char *s2);
 char *_getenv(char *name);
+void freeline(char *line);
 
 #define MAX_TOKENS 20
 #endif

@@ -1,7 +1,6 @@
 #include "shell.h"
 /**
  * execute - execute programm.
- * @filename: the file name.
  * @argvv: the commands.
  * Return: void.
  */
