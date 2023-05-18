@@ -12,4 +12,6 @@
 extern char **environ;
 void execute(char *argv, char *argvv[]);
 
+
+#define MAX_TOKENS 20
 #endif
