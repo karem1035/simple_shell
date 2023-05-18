@@ -42,7 +42,10 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
+		{
+			freeline(line);
 			perror(argv[0]);
+		}
 		freeline(line);
 		n = 0;
 	}
