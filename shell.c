@@ -7,7 +7,7 @@
  */
 int main(int __attribute__((unused)) argc, char *argv[])
 {
-	char *argvv[20], *token;
+	char *argvv[MAX_TOKENS], *token;
 	char *line = NULL;
 	size_t n = 0;
 	int i;
@@ -32,7 +32,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			line = NULL;
 			continue;
 		}
-		while (token)
+		while (token && i < MAX_TOKENS)
 		{
 			argvv[i] = token;
 			token = strtok(NULL, " \n");
