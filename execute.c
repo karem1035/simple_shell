@@ -5,7 +5,7 @@
  * @argvv: the commands.
  * Return: void.
  */
-void execute(char *filename, char *argvv[])
+void execute(char *argvv[])
 {
 	int stat;
 	pid_t pid;
@@ -18,7 +18,7 @@ void execute(char *filename, char *argvv[])
 	{
 		if (execve(argvv[0], argvv, environ) == -1)
 		{
-			perror(filename);
+			perror("");
 			exit(1);
 		}
 	}
