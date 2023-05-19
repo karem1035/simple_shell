@@ -12,16 +12,19 @@
 
 
 extern char **environ;
+
 void execute(char *argvv[]);
 char *_strdup(char *str);
-int _strlen(char *s);
-char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+int _strlen(const char *s);
+char *_strcat(char *dest,const char *src);
 int _which(char *argvv[]);
 unsigned int var_len(char *environ_i);
 unsigned int val_len(char *environ_i);
 int _strcmp(char *s1, char *s2);
 char *_getenv(char *name);
-void freeline(char *line);
+char *_getenv2(char *name);
+void freeline(char **line);
 int if_exit(char *argvv);
 char **tokenize(char *line, char *argvv[]);
 
