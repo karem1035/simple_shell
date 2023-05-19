@@ -1,35 +1,28 @@
 #include "shell.h"
 
 /**
- * _strdup - returns a pointer to a copy of the string
- * @str: the string to copy
- * Return: a pointer to a copy of the string
+ * _strcpy - copies the string pointed to by src
+ * @src: copied str
+ * @dest: place to paste
+ *
+ * Return: pasted string from src
  */
-char *_strdup(char *str)
-{
-	int i = 0;
-	char *p;
 
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	while (str[i] != '\0')
+char *_strcpy(char *dest, char *src)
+{
+	int i = 0, j;
+
+	while (*(src + i) != '\0')
 	{
 		i++;
 	}
-	i++;
-	p = malloc(sizeof(char) * i);
-	i = 0;
-	if (p == NULL)
-		return (NULL);
-	while (str[i] != '\0')
+	for (j = 0; j < i; j++)
 	{
-		p[i] = str[i];
-		i++;
+		dest[j] = src[j];
 	}
-	p[i] = '\0';
-	return (p);
+	dest[i] = '\0';
+
+	return (dest);
 }
 /**
  * _strlen - returns the length of a string.
@@ -37,7 +30,7 @@ char *_strdup(char *str)
  * Return: len of string;
  */
 
-int _strlen(char *s)
+int _strlen(const char *s)
 {
 	int i = 0;
 
@@ -55,7 +48,7 @@ int _strlen(char *s)
  * Return: pointer to the resulting string dest
  */
 
-char *_strcat(char *dest, char *src)
+char *_strcat(char *dest,const char *src)
 {
 	int ldst, lsrc, i, j;
 
@@ -95,7 +88,7 @@ int _which(char *argvv[])
 		if (!dir)
 			return (0);
 
-		dir = _strdup(token);
+		dir = _strcpy(dir, token);
 		_strcat(dir, "/");
 		_strcat(dir, argvv[0]);
 		if (stat(dir, &sb) == 0)
