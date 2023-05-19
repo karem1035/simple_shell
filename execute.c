@@ -23,7 +23,10 @@ void execute(char *argvv[])
 	}
 	else
 	{
-		wait(&stat);
+		if (waitpid(pid, &stat, 0) == -1)
+		{
+			perror("waitpid");
+			exit(1);
+		}
 	}
-
 }
