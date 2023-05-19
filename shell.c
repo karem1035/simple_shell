@@ -19,7 +19,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		{
 			write(1, "\n", 1);
 			free(line);
-			break;
+			exit(1);
 		}
 		if (!tokenize(line, argvv))
 		{
