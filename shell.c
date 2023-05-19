@@ -7,8 +7,7 @@
  */
 int main(int __attribute__((unused)) argc, char *argv[])
 {
-	char *argvv[MAX_TOKENS], *token;
-	char *line = NULL;
+	char *argvv[MAX_TOKENS], *token, *line = NULL;
 	size_t n = 0;
 	int i;
 	struct stat st;
@@ -39,6 +38,8 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			i++;
 		}
 		argvv[i] = NULL;
+		if (if_exit(argvv[0]))
+			exit(1);
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
