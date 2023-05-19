@@ -26,7 +26,8 @@ int main(int __attribute__((unused)) argc, char *argv[])
 
 		if (!tokenize(line, argvv))
 		{
-			freeline(line);
+			free(line);
+			line = NULL;
 			continue;
 		}
 		if (if_exit(argvv[0]))
@@ -35,13 +36,14 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			execute(argvv);
 		else if (!_which(argvv))
 		{
-			freeline(line);
+			free(line);
+			line = NULL;
 			perror(argv[0]);
 		}
-		freeline(line);
+		free(line);
+		line = NULL;
 		n = 0;
 	}
-	free(line);
 	return (0);
 }
 /**
@@ -49,8 +51,8 @@ int main(int __attribute__((unused)) argc, char *argv[])
  * @line: the line.
  * Return: void.
  */
-void freeline(char *line)
+void freeline(char **line)
 {
-	line = NULL;
-	free(line);
+	free(*line);
+	*line = NULL;
 }
