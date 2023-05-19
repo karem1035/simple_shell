@@ -14,11 +14,11 @@ char **tokenize(char *line, char *argvv[])
 		return (0);
 
 	while (token && i < MAX_TOKENS)
-		{
-			argvv[i] = token;
-			token = strtok(NULL, " \n");
-			i++;
-		}
+	{
+		argvv[i] = token;
+		token = strtok(NULL, " \n");
+		i++;
+	}
 	argvv[i] = NULL;
 
 	return (argvv);
