@@ -20,9 +20,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		if (getline(&line, &n, stdin) == -1)
 		{
 			if (isatty(0))
-			{
 				write(1, "\n", 1);
-			}
 			free(line);
 			exit(1);
 		}
