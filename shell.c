@@ -16,14 +16,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		if (isatty(0))
 			write(1, "$$ ", 3);
 		if (getline(&line, &n, stdin) == -1)
-		{
-			if (!isatty(0))
-				write(1, "$$ ", 3);
-			else
-				write(1, "\n", 1);
 			break;
-		}
-
 		if (!tokenize(line, argvv))
 		{
 			free(line);
