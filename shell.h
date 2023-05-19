@@ -17,7 +17,7 @@ void execute(char *argvv[]);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 int _strlen(const char *s);
-char *_strcat(char *dest,const char *src);
+char *_strcat(char *dest, const char *src);
 int _which(char *argvv[]);
 unsigned int var_len(char *environ_i);
 unsigned int val_len(char *environ_i);

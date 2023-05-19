@@ -48,7 +48,7 @@ int _strlen(const char *s)
  * Return: pointer to the resulting string dest
  */
 
-char *_strcat(char *dest,const char *src)
+char *_strcat(char *dest, const char *src)
 {
 	int ldst, lsrc, i, j;
 
