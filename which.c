@@ -103,11 +103,9 @@ int _which(char *argvv[])
 			argvv[0] = dir;
 			execute(argvv);
 			free(dir);
-			free(path);
 			return (1);
 		}
 		free(dir);
-		free(path);
 		token = strtok(NULL, delim);
 	}
 	return (0);
