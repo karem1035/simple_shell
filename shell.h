@@ -23,6 +23,7 @@ int _strcmp(char *s1, char *s2);
 char *_getenv(char *name);
 void freeline(char *line);
 int if_exit(char *argvv);
+char **tokenize(char *line, char *argvv[]);
 
 #define MAX_TOKENS 20
 #endif

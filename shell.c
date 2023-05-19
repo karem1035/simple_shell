@@ -7,9 +7,8 @@
  */
 int main(int __attribute__((unused)) argc, char *argv[])
 {
-	char *argvv[MAX_TOKENS], *token, *line = NULL;
+	char *argvv[MAX_TOKENS], *line = NULL;
 	size_t n = 0;
-	int i;
 	struct stat st;
 
 	while (1)
@@ -24,20 +23,12 @@ int main(int __attribute__((unused)) argc, char *argv[])
 				write(1, "\n", 1);
 			break;
 		}
-		token = strtok(line, " \n");
-		i = 0;
-		if (!token)
+
+		if (!tokenize(line, argvv))
 		{
 			freeline(line);
 			continue;
 		}
-		while (token && i < MAX_TOKENS)
-		{
-			argvv[i] = token;
-			token = strtok(NULL, " \n");
-			i++;
-		}
-		argvv[i] = NULL;
 		if (if_exit(argvv[0]))
 			exit(1);
 		if (stat(argvv[0], &st) == 0)
