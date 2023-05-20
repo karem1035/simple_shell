@@ -38,7 +38,6 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		else if (!_which(argvv))
 		{
 			print_error(argv[0], pnum, argvv[0]);
-			free(line);
 			continue;
 		}
 		free(line);
