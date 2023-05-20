@@ -31,6 +31,7 @@ void _puts(char *str);
 void _puts2(char *str);
 char int_to_char(int a);
 void print_error(char *fname, int pnum, char *cname);
+void freeargvv(char **argvv);
 
 #define MAX_TOKENS 20
 #endif
