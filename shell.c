@@ -16,12 +16,12 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	{
 		if (isatty(0))
 		{
-			write(1, "$$ ", 3);
+			_puts("$$ ");
 		}
 		if (getline(&line, &n, stdin) == -1)
 		{
 			if (isatty(0))
-				write(1, "\n", 1);
+				_puts("\n");
 			free(line);
 			exit(1);
 		}
@@ -32,7 +32,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			continue;
 		}
 		if (if_exit(argvv[0]))
-			exit(1);
+			exit(2);
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
