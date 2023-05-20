@@ -81,6 +81,9 @@ int _which(char *argvv[])
 	char delim[] = ":";
 	struct stat sb;
 
+	if (!path)
+		return (0);
+
 	token = strtok(path, delim);
 	while (token)
 	{
@@ -91,7 +94,7 @@ int _which(char *argvv[])
 		dir = _strcpy(dir, token);
 		_strcat(dir, "/");
 		_strcat(dir, argvv[0]);
-		if (stat(dir, &sb) == 0)
+		if (stat(dir, &sb) == 0 && !access(dir, X_OK))
 		{
 			argvv[0] = dir;
 			execute(argvv);
