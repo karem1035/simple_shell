@@ -10,6 +10,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	char *argvv[MAX_TOKENS], *line = NULL;
 	size_t n = 0;
 	struct stat st;
+	int pnum = 0;
 
 	while (1)
 	{
@@ -36,13 +37,14 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			execute(argvv);
 		else if (!_which(argvv))
 		{
+			print_error(argv[0], pnum, argvv[0]);
 			free(line);
-			line = NULL;
-			perror(argv[0]);
+			continue;
 		}
 		free(line);
 		line = NULL;
 		n = 0;
+		pnum++;
 	}
 	return (0);
 }
