@@ -76,7 +76,7 @@ char *_strcat(char *dest, const char *src)
 int _which(char *argvv[])
 {
 	char *dir = NULL;
-	char *path = _getenv("PATH");
+	char *path = _getenv2("PATH");
 	char *token;
 	char delim[] = ":";
 	struct stat sb;
