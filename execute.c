@@ -4,7 +4,7 @@
  * @argvv: the commands.
  * Return: void.
  */
-void execute(char *argvv[])
+void execute(char *argvv[], char *full_path)
 {
 	int stat;
 	pid_t pid;
@@ -15,7 +15,7 @@ void execute(char *argvv[])
 
 	if (pid == 0)
 	{
-		if (execve(argvv[0], argvv, environ) == -1)
+		if (execve(full_path, argvv, environ) == -1)
 		{
 			perror("");
 			exit(1);
