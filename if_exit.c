@@ -13,8 +13,9 @@ int if_exit(char *argvv)
 	return (0);
 }
 /**
- *
- *
+ * _getenv2 - get the environment variable value.
+ * @name: name of the variable.
+ * Return: the value.
  */
 char *_getenv2(char *name)
 {

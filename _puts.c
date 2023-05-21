@@ -31,8 +31,9 @@ void _puts2(char *str)
 	}
 }
 /**
- * int_to_char - converts int to char;
+ * int_to_str - converts int to char;
  * @a: the int.
+ * @str: the str.
  * Return: the char.
  */
 char *int_to_str(unsigned int a, char *str)
