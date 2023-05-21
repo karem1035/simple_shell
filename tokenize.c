@@ -7,7 +7,7 @@
  */
 char **tokenize(char *line, char *argvv[])
 {
-	char *token = strtok(line, " ");
+	char *token = strtok(line, " \n");
 	int i = 0;
 
 	if (!token)
@@ -15,32 +15,11 @@ char **tokenize(char *line, char *argvv[])
 
 	while (token && i < MAX_TOKENS)
 	{
-		argvv[i] = _strdup(token);
-        if (!argvv[i])
-        {
-            freeargvv(argvv);
-            return NULL;
-        }
-		token = strtok(NULL, " ");
+		argvv[i] = token;
+		token = strtok(NULL, " \n");
 		i++;
 	}
 	argvv[i] = NULL;
 
 	return (argvv);
-}
-
-
-void freeargvv(char **argvv)
-{
-	size_t i;
-
-	if (!argvv)
-		return;
-	for (i = 0; argvv && argvv[i]; i++)
-	{
-		free(argvv[i]);
-		argvv[i] = NULL;
-	}
-	free(argvv);
-	argvv = NULL;
 }

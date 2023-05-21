@@ -73,39 +73,36 @@ char *_strcat(char *dest, const char *src)
  * @argvv: list of arguments
  * Return: 1 at success and 0 if failure
  */
-char *_which(char *argvv[])
+int _which(char *argvv[])
 {
 	char *dir = NULL;
 	char *path = _getenv2("PATH");
-	char *path_copy;
 	char *token;
 	char delim[] = ":";
+	struct stat sb;
 
 	if (!path)
 		return (0);
 
-	path_copy = _strdup(path);
 	token = strtok(path, delim);
 	while (token)
 	{
 		dir = malloc(_strlen(token) + _strlen(argvv[0]) + 2);
 		if (!dir)
-		{
-			free(path_copy);
 			return (0);
-		}
 
 		dir = _strcpy(dir, token);
 		_strcat(dir, "/");
 		_strcat(dir, argvv[0]);
-		if (!access(dir, X_OK))
+		if (stat(dir, &sb) == 0 && !access(dir, X_OK))
 		{
-			free(path_copy);
-			return(dir);
+			argvv[0] = dir;
+			execute(argvv);
+			free(dir);
+			return (1);
 		}
 		free(dir);
 		token = strtok(NULL, delim);
 	}
-	free(path_copy);
-	return (NULL);
+	return (0);
 }
