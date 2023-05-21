@@ -20,8 +20,4 @@ void print_error(char *fname, unsigned int pnum, char *cname)
 	_puts2(": ");
 	_puts2("not found\n");
 	free(number);
-	if (!isatty(0))
-	{
-		exit(127);
-	}
 }
