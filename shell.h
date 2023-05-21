@@ -29,8 +29,8 @@ int if_exit(char *argvv);
 char **tokenize(char *line, char *argvv[]);
 void _puts(char *str);
 void _puts2(char *str);
-char int_to_char(int a);
-void print_error(char *fname, int pnum, char *cname);
+char *int_to_str(unsigned int a, char *str);
+void print_error(char *fname, unsigned int pnum, char *cname);
 
 #define MAX_TOKENS 20
 #endif

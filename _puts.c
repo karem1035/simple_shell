@@ -35,9 +35,24 @@ void _puts2(char *str)
  * @a: the int.
  * Return: the char.
  */
-char int_to_char(int a)
+char *int_to_str(unsigned int a, char *str)
 {
-	char c = 48 + a;
+	int digit = 0, n = a, i;
 
-	return (c);
+	while (n != 0)
+	{
+		n /= 10;
+		digit++;
+	}
+
+	str = malloc(sizeof(char) * (digit + 1));
+	if (str == NULL)
+		return (NULL);
+	for (i = digit - 1; i >= 0; i--)
+	{
+		str[i] = (a % 10) + '0';
+		a /= 10;
+	}
+	str[digit] = '\0';
+	return (str);
 }
