@@ -32,11 +32,16 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			continue;
 		}
 		if (if_exit(argvv[0]))
-			exit(2);
+		{
+			exit(0);
+		}
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
+		{
 			print_error(argv[0], pnum, argvv[0]);
+			continue;
+		}
 		free(line);
 		line = NULL;
 		n = 0;

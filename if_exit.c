@@ -7,7 +7,9 @@
 int if_exit(char *argvv)
 {
 	if (_strcmp(argvv, "exit") == 0)
+	{
 		return (1);
+	}
 	return (0);
 }
 /**
