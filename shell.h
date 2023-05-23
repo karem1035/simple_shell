@@ -18,6 +18,10 @@ typedef struct built_in_command
 	int (*function_to_execute_on_cmd)(char *argvv[]);
 } bin_cmd;
 
+
+void signalhandler(int n __attribute__((unused)));
+void prompt(void);
+
 void execute(char *argvv[]);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
@@ -36,7 +40,6 @@ void _puts(char *str);
 void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
 void print_error(char *fname, unsigned int pnum, char *cname);
-int _CD(char *cmd);
 void _ENV(char *env[]);
 int _EXIT(char *argvv[]);
 int is_integer(char *input);
