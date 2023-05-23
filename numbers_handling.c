@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * is_integer - checks if a string represents an integer
  * @input: the string to check
@@ -9,27 +8,29 @@
  */
 int is_integer(char *input)
 {
-    long int num = 0;
+	long int num = 0;
+	int negative;
 
-    if (*input == '\0')
-        return (0);
+	if (*input == '\0')
+		return (0);
 
-    int negative = (*input == '-');
-    if (negative || *input == '+')
-        input++;
+	negative = (*input == '-');
+	if (negative || *input == '+')
+		input++;
 
-    while (*input != '\0') {
-        if (*input < '0' || *input > '9')
-            return (0);
+	while (*input != '\0')
+	{
+		if (*input < '0' || *input > '9')
+			return (0);
 
-        num = num * 10 + (*input - '0');
-        input++;
-    }
+		num = num * 10 + (*input - '0');
+		input++;
+	}
 
-    if (negative)
-        num *= -1;
+	if (negative)
+		num *= -1;
 
-    return (1);
+	return (1);
 }
 
 /**

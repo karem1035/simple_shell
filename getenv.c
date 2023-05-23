@@ -10,7 +10,7 @@ unsigned int var_len(char *environ_i)
 	unsigned int i;
 
 	for (i = 0; environ_i[i] != '='; i++)
-	;
+		;
 	return (i);
 }
 /**
@@ -23,7 +23,7 @@ unsigned int val_len(char *environ_i)
 	unsigned int i;
 
 	for (i = 0; environ_i[i] != '\0'; i++)
-	;
+		;
 	return (i);
 }
 
@@ -115,7 +115,7 @@ char *_getenv2(char *name)
 }
 
 /**
- * setenv - sets the value of an environment variable
+ * _setenv - sets the value of an environment variable
  * @name: the name of the environment variable to set
  * @value: the value to set the environment variable to
  * @overwrite: whether to overwrite an existing value for the variable
@@ -131,25 +131,19 @@ int _setenv(const char *name, const char *value, int overwrite)
 	if (name == NULL || name[0] == '\0' || strchr(name, '=') != NULL)
 	{
 		perror("setenv");
-		return -1;
+		return (-1);
 	}
 	if (!overwrite && _getenv2(name) != NULL)
-		return 0; 
-
+		return (0);
 	name_l = _strlen(name);
-
 	if (value)
 		value_l = _strlen(value);
 	else
 		value_l = 0;
-
 	total_l = name_l + value_l + 2;
-
-
 	new_env = malloc(total_l);
 	if (new_env == NULL)
-		return -1; 
-
+		return (-1);
 	p = new_env;
 	_memcpy(p, name, name_l);
 	p += name_l;
@@ -161,13 +155,11 @@ int _setenv(const char *name, const char *value, int overwrite)
 	}
 	*p = '\0';
 	result = putenv(new_env);
-
 	if (result != 0)
 	{
 		perror("setenv");
 		free(new_env);
-		return -1; 
+		return (-1);
 	}
-
-	return 0;
+	return (0);
 }

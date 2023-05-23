@@ -4,9 +4,9 @@ int _CD(char *cmd)
 {
 }
 /**
- * _ENV - prints environment variables from passed 
+ * _ENV - prints environment variables from passed
  * env array
- * 
+ * @env: array of environs
  */
 void _ENV(char *env[])
 {
@@ -21,9 +21,9 @@ void _ENV(char *env[])
 }
 
 /**
- * _ENV - prints environment variables from
+ * _ENV2 - prints environment variables from
  * environ and you don't need env argument
- * 
+ *
  */
 void _ENV2(void)
 {
@@ -38,8 +38,8 @@ void _ENV2(void)
 }
 /**
  * _EXIT - after checking if the command is a built_in
- * 				KARIM should give me tokenized command line to handle
- * 				the exit status
+ *		KARIM should give me tokenized command line to handle
+ *		the exit status
  * @argvv: array of tokenized command
  * Return: 0 if command is not right
  */
