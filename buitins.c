@@ -1,5 +1,40 @@
 #include "shell.h"
 
+int _CD(char *dir)
+{
+	char *o_PWD = _getenv2("PWD"), *HOME = _getenv2("HOME"), *new = NULL;
+	char n_PWD[1024];
+
+	if(!dir || _strcmp(dir, "~") == 0 || _strcmp(dir, "") == 0)
+		new = HOME;
+	else if (_strcmp(dir, "-") == 0)
+	{
+		new = _getenv2("OLDPWD");
+		if (!new)
+		{
+			perror("cd");
+			return (-1);
+		}
+
+	}
+	else
+		new = dir;
+
+	if (chdir(new) != 0)
+	{
+		perror("cd");
+		return(-1);
+	}
+	if (!getcwd(n_PWD, sizeof(n_PWD)))
+	{
+		perror("cd");
+		return(-1);
+	}
+	_setenv("OLDPWD", o_PWD, 1);
+	_setenv("PWD", n_PWD, 1);
+	return(0);
+}
+
 /**
  * _ENV - prints environment variables from passed
  * env array

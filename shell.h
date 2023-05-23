@@ -52,7 +52,7 @@ int _atoi(char *s);
 char *_strncpy(char *dest, char *src, int n);
 char *_strchr(char *s, char c);
 char *_memcpy(char *dest, char *src, unsigned int n);
-int _setenv(const char *name, const char *value, int overwrite);
-
+int _setenv(char *name, char *value, int overwrite);
+int _CD(char *dir);
 #define MAX_TOKENS 20
 #endif
