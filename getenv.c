@@ -1,37 +1,6 @@
 #include "shell.h"
 
 /**
- * _strdup - returns a pointer to a copy of the string
- * @str: the string to copy
- * Return: a pointer to a copy of the string
- */
-char *_strdup(char *str)
-{
-	int i = 0;
-	char *p;
-
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	i++;
-	p = malloc(sizeof(char) * i);
-	i = 0;
-	if (p == NULL)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		p[i] = str[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
-}
-/**
  * var_len - get the var length.
  * @environ_i: the var name.
  * Return: the length.
@@ -57,30 +26,7 @@ unsigned int val_len(char *environ_i)
 	;
 	return (i);
 }
-/**
- * _strcmp - compares two strings.
- * @s1: str to be compared
- * @s2: str to be compared
- * Return: difference in ascii value
- */
-int _strcmp(char *s1, char *s2)
-{
-	int i, res = 0;
 
-	if (_strlen(s1) != _strlen(s2))
-		return (1);
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0')
-	{
-		if (s1[i] != s2[i])
-		{
-			res = s1[i] - s2[i];
-			break;
-		}
-		i++;
-	}
-	return (res);
-}
 /**
  * _getenv - get the environment variable value.
  * @name: name of the variable.
@@ -124,4 +70,104 @@ char *_getenv(char *name)
 		i++;
 	}
 	return (NULL);
+}
+/**
+ * _getenv2 - get the environment variable value.
+ * @name: name of the variable.
+ * Return: the value.
+ */
+char *_getenv2(char *name)
+{
+	unsigned int i = 0;
+	char *var = NULL;
+	char *val = NULL;
+	unsigned int var_length;
+	unsigned int val_length;
+
+	while (environ[i])
+	{
+		var_length = var_len(environ[i]);
+		var = malloc(var_length + 1);
+		if (!var)
+			return (NULL);
+
+		_strncpy(var, environ[i], var_length);
+		var[var_length] = '\0';
+
+		if (_strcmp(var, name) == 0)
+		{
+			val_length = val_len(environ[i] + var_length + 1);
+			val = malloc(val_length + 1);
+			if (!val)
+			{
+				free(var);
+				return (NULL);
+			}
+			_strncpy(val, environ[i] + var_length + 1, val_length);
+			val[val_length] = '\0';
+			free(var);
+			return (val);
+		}
+		free(var);
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * setenv - sets the value of an environment variable
+ * @name: the name of the environment variable to set
+ * @value: the value to set the environment variable to
+ * @overwrite: whether to overwrite an existing value for the variable
+ *
+ * Return: 0 on success, -1 on failure
+ */
+int _setenv(const char *name, const char *value, int overwrite)
+{
+	size_t name_l, value_l, total_l;
+	char *new_env, *p;
+	int result;
+
+	if (name == NULL || name[0] == '\0' || strchr(name, '=') != NULL)
+	{
+		perror("setenv");
+		return -1;
+	}
+	if (!overwrite && _getenv2(name) != NULL)
+		return 0; 
+
+	name_l = _strlen(name);
+
+	if (value)
+		value_l = _strlen(value);
+	else
+		value_l = 0;
+
+	total_l = name_l + value_l + 2;
+
+
+	new_env = malloc(total_l);
+	if (new_env == NULL)
+		return -1; 
+
+	p = new_env;
+	_memcpy(p, name, name_l);
+	p += name_l;
+	*p++ = '=';
+	if (value)
+	{
+		_memcpy(p, value, value_l);
+		p += value_l;
+	}
+	*p = '\0';
+	result = putenv(new_env);
+
+	if (result != 0)
+	{
+		perror("setenv");
+		free(new_env);
+		return -1; 
+	}
+
+	return 0;
 }
