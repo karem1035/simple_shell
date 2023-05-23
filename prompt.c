@@ -5,6 +5,6 @@
 */
 void prompt(void)
 {
-        if ((isatty(0) == 1) && (isatty(1) == 1))
-                _puts("$$ ");
+	if ((isatty(0) == 1) && (isatty(1) == 1))
+		_puts("$$ ");
 }

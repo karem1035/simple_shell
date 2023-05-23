@@ -12,6 +12,11 @@
 
 
 extern char **environ;
+/**
+ * struct built_in_command - a list of built in commands.
+ * @cmd: the command to be checcked.
+ * @function_to_execute_on_cmd: function to check.
+ */
 typedef struct built_in_command
 {
 	char *cmd;

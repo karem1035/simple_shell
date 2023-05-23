@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 		input_size = getline(&line, &buffer_size, stdin);
 		if (input_size < 0)
 		{
-		    	free(line);
+			free(line);
 			break;
 		}
 		if (!tokenize(line, argvv))

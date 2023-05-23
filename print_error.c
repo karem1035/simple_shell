@@ -2,7 +2,7 @@
 /**
  * print_error - prints the error message.
  * @fname: the file name argv[0].
- * @pnum: the process number.
+ * @process_number: the process number.
  * @cname: the command name.
  * Return: void.
  */

@@ -6,6 +6,6 @@
 */
 void signalhandler(int n __attribute__((unused)))
 {
-    write(2, "\n", 1);
-    write(2, "$$ ", 3);
+	_puts("\n");
+	_puts("$$ ");
 }
