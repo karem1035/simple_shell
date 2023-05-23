@@ -1,13 +1,18 @@
 #include "shell.h"
 
-int _CD(char *dir)
+/**
+ * _CD - change current directory to a desired one
+ * @argvv: array of tokenized command
+ * Return: 0 if success, -1 if failure
+ */
+int _CD(char *argvv[])
 {
 	char *o_PWD = _getenv2("PWD"), *HOME = _getenv2("HOME"), *new = NULL;
 	char n_PWD[1024];
 
-	if(!dir || _strcmp(dir, "~") == 0 || _strcmp(dir, "") == 0)
+	if(!argvv[1] || _strcmp(argvv[1], "~") == 0 || _strcmp(argvv[1], "") == 0)
 		new = HOME;
-	else if (_strcmp(dir, "-") == 0)
+	else if (_strcmp(argvv[1], "-") == 0)
 	{
 		new = _getenv2("OLDPWD");
 		if (!new)
@@ -18,7 +23,7 @@ int _CD(char *dir)
 
 	}
 	else
-		new = dir;
+		new = argvv[1];
 
 	if (chdir(new) != 0)
 	{
@@ -36,28 +41,11 @@ int _CD(char *dir)
 }
 
 /**
- * _ENV - prints environment variables from passed
- * env array
- * @env: array of environs
- */
-void _ENV(char *env[])
-{
-	int i = 0;
-
-	while (env[i] != NULL)
-	{
-		write(STDOUT_FILENO, env[i], _strlen(env[i]));
-		i++;
-	}
-	exit(0);
-}
-
-/**
- * _ENV2 - prints environment variables from
+ * _ENV - prints environment variables from
  * environ and you don't need env argument
  *
  */
-void _ENV2(void)
+int _ENV(char __attribute__((unused)) *argvv[])
 {
 	int i = 0;
 
@@ -66,14 +54,14 @@ void _ENV2(void)
 		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
 		i++;
 	}
-	exit(0);
+	return(0);
 }
 /**
  * _EXIT - after checking if the command is a built_in
  *		KARIM should give me tokenized command line to handle
  *		the exit status
  * @argvv: array of tokenized command
- * Return: 0 if command is not right
+ * Return: -1 if command is not right
  */
 int _EXIT(char *argvv[])
 {
@@ -87,7 +75,7 @@ int _EXIT(char *argvv[])
 	if (argcc > 2 || (argcc == 2 && !is_integer(argvv[1])))
 	{
 		write(STDERR_FILENO, "Usage: exit [status]\n", 21);
-		return (0); /*this means the function fails ya karim */
+		return (-1); /*this means the function fails ya karim */
 	}				/*elmafrood ba2a y3mel continue fy elloop el2asasya fy shell.c*/
 	/*and free(line) in shell.c at failure*/
 	else if (argcc == 2)
