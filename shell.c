@@ -5,23 +5,25 @@
  * @argv: array of arguments.
  * Return: 0 all time
  */
-int main(int __attribute__((unused)) argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	char *argvv[MAX_TOKENS], *line = NULL;
-	size_t n = 0;
+	size_t buffer_size = 0;
+	ssize_t input_size = 0;
 	struct stat st;
-	int pnum = 1;
+	int process_number = 1;
 
+	if (argc < 1)
+		return (-1);
+	signal(SIGINT, signalhandler);
 	while (1)
 	{
-		if (isatty(0))
-			_puts("$$ ");
-		if (getline(&line, &n, stdin) == -1)
+		prompt();
+		input_size = getline(&line, &buffer_size, stdin);
+		if (input_size < 0)
 		{
-			if (isatty(0))
-				_puts("\n");
-			free(line);
-			exit(0);
+		    	free(line);
+			break;
 		}
 		if (!tokenize(line, argvv))
 		{
@@ -35,13 +37,13 @@ int main(int __attribute__((unused)) argc, char *argv[])
 			execute(argvv);
 		else if (!_which(argvv))
 		{
-			print_error(argv[0], pnum, argvv[0]);
+			print_error(argv[0], process_number, argvv[0]);
 			continue;
 		}
 		free(line);
 		line = NULL;
-		n = 0;
-		pnum++;
+		buffer_size = 0;
+		process_number++;
 	}
 	return (0);
 }

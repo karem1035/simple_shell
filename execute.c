@@ -15,18 +15,11 @@ void execute(char *argvv[])
 
 	if (pid == 0)
 	{
-		if (execve(argvv[0], argvv, environ) == -1)
-		{
-			perror("");
-			exit(1);
-		}
+		execve(argvv[0], argvv, environ);
+		perror(argvv[0]);
+		free(argvv);
+		exit(98);
 	}
 	else
-	{
-		if (waitpid(pid, &stat, 0) == -1)
-		{
-			perror("waitpid");
-			exit(1);
-		}
-	}
+		wait(&stat);
 }
