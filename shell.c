@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1;
+	int process_number = 1, bst;
 
 	if (argc < 1)
 		return (-1);
@@ -31,6 +31,12 @@ int main(int argc, char *argv[])
 			line = NULL;
 			continue;
 		}
+		bst = is_builtin(argvv);
+		if (bst == -1)
+		{
+			continue;
+		}
+		
 		if (if_exit(argvv[0]))
 			exit(0);
 		if (stat(argvv[0], &st) == 0)

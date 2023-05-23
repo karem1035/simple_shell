@@ -57,13 +57,13 @@ int _ENV(char __attribute__((unused)) *argvv[])
 	return(0);
 }
 /**
- * _EXIT - after checking if the command is a built_in
+ * MY_EXIT - after checking if the command is a built_in
  *		KARIM should give me tokenized command line to handle
  *		the exit status
  * @argvv: array of tokenized command
  * Return: -1 if command is not right
  */
-int _EXIT(char *argvv[])
+int MY_EXIT(char *argvv[])
 {
 	int status_code;
 	int argcc = 0;

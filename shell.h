@@ -46,7 +46,7 @@ void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
 void print_error(char *fname, unsigned int pnum, char *cname);
 int _ENV(char *argvv[]);
-int _EXIT(char *argvv[]);
+int MY_EXIT(char *argvv[]);
 int is_integer(char *input);
 int _atoi(char *s);
 char *_strncpy(char *dest, char *src, int n);

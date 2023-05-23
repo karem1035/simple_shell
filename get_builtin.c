@@ -1,4 +1,4 @@
-#include "shell.c"
+#include "shell.h"
 
 /**
  * is_builtin - checks if a command is built in or not and
@@ -12,7 +12,7 @@ int is_builtin(char *argvv[])
 	bin_cmd bin_cmds[] = 
 	{
 		{"cd", _CD},
-		{"exit", _Exit},
+		{"exit", MY_EXIT},
 		{"env", _ENV},
 		{NULL, NULL},
 	};
