@@ -44,7 +44,7 @@ int _CD(char *argvv[])
 		return(-1);
 	}
 	_setenv("OLDPWD", o_PWD, 1);
-	_setenv("PWD",cwd, 1);
+	_setenv("PWD", cwd, 1);
 
 	free(o_PWD);
 	free(cwd);
