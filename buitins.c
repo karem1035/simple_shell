@@ -1,8 +1,5 @@
 #include "shell.h"
 
-int _CD(char *cmd)
-{
-}
 /**
  * _ENV - prints environment variables from passed
  * env array
