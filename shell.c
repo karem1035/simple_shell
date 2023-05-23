@@ -37,8 +37,7 @@ int main(int argc, char *argv[])
 			continue;
 		}
 		
-		if (if_exit(argvv[0]))
-			exit(0);
+
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))
