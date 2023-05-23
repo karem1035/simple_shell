@@ -1,4 +1,4 @@
-#include <stddef.h>
+#include "shell.h"
 
 /**
  * _strchr - search for a character in a str
@@ -50,4 +50,35 @@ for (i = 0; i < n; i++)
 	dest[i] = src[i];
 }
 	return (dest);
+}
+/**
+ * _puts - prints a string to STDOUT 1.
+ * @str: the string.
+ * Return: void.
+ */
+void _puts(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+}
+/**
+ * _puts2 - prints a string to STDERR 2.
+ * @str: the string.
+ * Return: void.
+ */
+void _puts2(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(2, &str[i], 1);
+		i++;
+	}
 }
