@@ -5,13 +5,13 @@
  * @argv: array of arguments.
  * Return: 0 all time
  */
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char *env[])
 {
 	char *argvv[MAX_TOKENS], *line = NULL;
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1, bst;
+	int process_number = 1, bst, i;
 
 	if (argc < 1)
 		return (-1);
@@ -31,13 +31,18 @@ int main(int argc, char *argv[])
 			line = NULL;
 			continue;
 		}
-		bst = is_builtin(argvv);
-		if (bst == -1)
+		if (_strcmp(argvv[0], "env") == 0)
 		{
+			for (i = 0; env[i]; i++)
+			{
+				write(STDOUT_FILENO, environ[i], _strlen(env[i]));
+				write(STDOUT_FILENO, "\n", 1);
+			}
 			continue;
 		}
-		
-
+		bst = is_builtin(argvv);
+		if (bst == -1)
+			continue;
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv);
 		else if (!_which(argvv))

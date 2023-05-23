@@ -7,36 +7,47 @@
  */
 int _CD(char *argvv[])
 {
-	char *o_PWD = _getenv2("PWD"), *HOME = _getenv2("HOME"), *new = NULL;
-	char n_PWD[1024];
+	int i, argcc = 0, result;
+	char *o_PWD = _getenv2("OLDPWD"), *cwd = NULL;
 
-	if(!argvv[1] || _strcmp(argvv[1], "~") == 0 || _strcmp(argvv[1], "") == 0)
-		new = HOME;
+	for (i = 0; argvv[i]; i++)
+		argcc++;
+	if (argcc > 2)
+	{
+		write(STDERR_FILENO, "Usage: exit [DIRECTORY]\n", 24);
+		return (-1); /*this means the function fails ya karim */
+	}
+	if (!o_PWD)
+		o_PWD = _strdup(_getenv2("HOME"));
+	if (argcc == 1)
+	{
+		result = chdir(_getenv2("HOME"));
+	}
 	else if (_strcmp(argvv[1], "-") == 0)
 	{
-		new = _getenv2("OLDPWD");
-		if (!new)
-		{
-			perror("cd");
-			return (-1);
-		}
-
+		result = chdir(o_PWD);
+		write(STDOUT_FILENO, o_PWD, _strlen(o_PWD));
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	else
-		new = argvv[1];
-
-	if (chdir(new) != 0)
+		result = chdir(argvv[1]);
+	if (result != 0)
 	{
-		perror("cd");
+		perror(argvv[0]);
 		return(-1);
 	}
-	if (!getcwd(n_PWD, sizeof(n_PWD)))
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
 	{
-		perror("cd");
+		perror(argvv[0]);
 		return(-1);
 	}
 	_setenv("OLDPWD", o_PWD, 1);
-	_setenv("PWD", n_PWD, 1);
+	_setenv("PWD",cwd, 1);
+
+	free(o_PWD);
+	free(cwd);
 	return(0);
 }
 
