@@ -32,7 +32,10 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		if (_strcmp(argvv[0], "exit") == 0)
-			exit(0);
+		{
+			free(line);
+			_exit(0);
+		}
 		if (_strcmp(argvv[0], "env") == 0)
 		{
 			for (i = 0; env[i]; i++)
