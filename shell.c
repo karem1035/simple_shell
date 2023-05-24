@@ -31,10 +31,19 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			continue;
 		}
-		if (is_builtin(argvv, env, line) == -1)
+		if (_strcmp(argvv[0], "exit") == 0)
 		{
-			free(line);
-			continue;
+	            free(line);
+        	    _exit(0);
+		}
+		if (_strcmp(argvv[0], "env") == 0)
+        	{
+			for (i = 0; env[i]; i++)
+       	     		{
+				write(STDOUT_FILENO, environ[i], _strlen(env[i]));
+				write(STDOUT_FILENO, "\n", 1);
+			}
+            		continue;
 		}
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
