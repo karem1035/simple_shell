@@ -31,13 +31,9 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			continue;
 		}
-<<<<<<< HEAD
 		if (is_builtin(argvv, env, line) == -1)
-=======
-		if (is_builtin(argvv, env) == -1)
 		{
 			free(line);
->>>>>>> refs/remotes/origin/master
 			continue;
 		}
 		if (stat(argvv[0], &st) == 0)
