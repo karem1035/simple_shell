@@ -114,7 +114,7 @@ int _setenv(char *name, char *value, int overwrite, char **env)
 		perror("setenv");
 		return (-1);
 	}
-	if (!overwrite && _getenv2(name, env) != NULL)
+	if (!overwrite && _getenv(name, env) != NULL)
 		return (0);
 	name_l = _strlen(name);
 	if (value)
