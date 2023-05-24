@@ -3,7 +3,6 @@
  * main - UNIX command line interpreter.
  * @argc: number of arguments.
  * @argv: array of arguments.
- * @env: environ array
  * Return: 0 all time
  */
 int main(int argc, char *argv[], char *env[])
@@ -26,24 +25,25 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
-		if (!tokenize(line, argvv, input_size))
+		if (!tokenize(line, argvv))
 		{
 			free(line);
+			line = NULL;
+			continue;
+		}
+		if (_strcmp(argvv[0], "env") == 0)
+		{
+			for (i = 0; env[i]; i++)
+			{
+				write(STDOUT_FILENO, env[i], _strlen(env[i]));
+				write(STDOUT_FILENO, "\n", 1);
+			}
 			continue;
 		}
 		if (_strcmp(argvv[0], "exit") == 0)
 		{
-	            free(line);
-        	    _exit(0);
-		}
-		if (_strcmp(argvv[0], "env") == 0)
-        	{
-			for (i = 0; env[i]; i++)
-       	     		{
-				write(STDOUT_FILENO, env[i], _strlen(env[i]));
-				write(STDOUT_FILENO, "\n", 1);
-			}
-            		continue;
+			free(line);
+			_exit(0);
 		}
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
@@ -53,7 +53,9 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		free(line);
-		reset_bufsize_inc_pnum(&buffer_size, &process_number);
+		line = NULL;
+		buffer_size = 0;
+		process_number++;
 	}
 	return (0);
 }
@@ -66,14 +68,4 @@ void freeline(char **line)
 {
 	free(*line);
 	*line = NULL;
-}
-/**
- * reset_bufsize_inc_pnum - reset_bufsize_inc_pnum
- * @buffer_size: buffer_size
- * @pnum: process number
- */
-void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum)
-{
-	*buffer_size = 0;
-	*pnum = *pnum + 1;
 }

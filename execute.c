@@ -12,16 +12,14 @@ void execute(char *argvv[], char **env)
 
 	pid = fork();
 	if (pid == -1)
-		_exit(1);
+		exit(1);
 
 	if (pid == 0)
 	{
 		execve(argvv[0], argvv, env);
 		perror(argvv[0]);
-		freeargvv(argvv);
-		_exit(98);
+		exit(98);
 	}
 	else
 		wait(&stat);
 }
-/*{}*/
