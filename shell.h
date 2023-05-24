@@ -39,7 +39,7 @@ char *_getenv(char *name, char *env[]);
 char *_getenv2(char *name, char *env[]);
 void freeline(char **line);
 int if_exit(char *argvv);
-char **tokenize(char *line, char *argvv[]);
+char **tokenize(char *line, char *argvv[], ssize_t input_size);
 void _puts(char *str);
 void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
@@ -56,6 +56,7 @@ int _CD(char *argvv[], char **env);
 int is_builtin(char *argvv[], char **env);
 void freeargvv(char **argvv);
 int _strncmp(char *s1, char *s2, int n);
+void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum);
 
 #define MAX_TOKENS 20
 #endif

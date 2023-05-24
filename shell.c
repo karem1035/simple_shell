@@ -26,15 +26,16 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
-		line[input_size - 1] = '\0';
-		if (!tokenize(line, argvv))
+		if (!tokenize(line, argvv, input_size))
 		{
 			free(line);
-			line = NULL;
 			continue;
 		}
 		if (is_builtin(argvv, env) == -1)
+		{
+			free(line);
 			continue;
+		}
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
 		else if (!_which(argvv, env))
@@ -43,9 +44,7 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		free(line);
-		line = NULL;
-		buffer_size = 0;
-		process_number++;
+		reset_bufsize_inc_pnum(&buffer_size, &process_number);
 	}
 	return (0);
 }
@@ -58,4 +57,14 @@ void freeline(char **line)
 {
 	free(*line);
 	*line = NULL;
+}
+/**
+ * reset_bufsize_inc_pnum - reset_bufsize_inc_pnum
+ * @buffer_size: buffer_size
+ * @pnum: process number
+ */
+void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum)
+{
+	*buffer_size = 0;
+	*pnum = *pnum + 1;
 }
