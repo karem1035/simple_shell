@@ -32,51 +32,32 @@ unsigned int val_len(char *environ_i)
  * @name: name of the variable.
  * Return: the value.
  */
-char *_getenv(char *name)
+char *_getenv(char *name, char *env[])
 {
-	unsigned int i = 0, j, k;
-	char *var = NULL;
-	char *val = NULL;
-
-	while (environ[i])
+	size_t name_len;
+	if (!name)
 	{
-		var = malloc(var_len(environ[i]) + 1);
-		if (!var)
-			return (NULL);
-
-		for (j = 0; environ[i][j] != '='; j++)
-			var[j] = environ[i][j];
-		var[j] = '\0';
-
-		if (_strcmp(var, name) == 0)
-		{
-			val = malloc(val_len(environ[i]) + 1);
-			if (!val)
-			{
-				free(var);
-				return (NULL);
-			}
-			j++;
-			for (k = 0; environ[i][j] != '\0'; k++)
-			{
-				val[k] = environ[i][j];
-				j++;
-			}
-			val[k] = '\0';
-			free(var);
-			return (val);
-		}
-		free(var);
-		i++;
+		return NULL;
 	}
-	return (NULL);
+
+	name_len = strlen(name);
+
+	for (; *env; ++env)
+	{
+		if (_strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
+		{
+			return (*env + name_len + 1);
+		}
+	}
+
+	return NULL;
 }
 /**
  * _getenv2 - get the environment variable value.
  * @name: name of the variable.
  * Return: the value.
  */
-char *_getenv2(char *name)
+char *_getenv2(char *name, char *env[])
 {
 	unsigned int i = 0;
 	char *var = NULL;
@@ -84,26 +65,26 @@ char *_getenv2(char *name)
 	unsigned int var_length;
 	unsigned int val_length;
 
-	while (environ[i])
+	while (env[i])
 	{
-		var_length = var_len(environ[i]);
+		var_length = var_len(env[i]);
 		var = malloc(var_length + 1);
 		if (!var)
 			return (NULL);
 
-		_strncpy(var, environ[i], var_length);
+		_strncpy(var, env[i], var_length);
 		var[var_length] = '\0';
 
 		if (_strcmp(var, name) == 0)
 		{
-			val_length = val_len(environ[i] + var_length + 1);
+			val_length = val_len(env[i] + var_length + 1);
 			val = malloc(val_length + 1);
 			if (!val)
 			{
 				free(var);
 				return (NULL);
 			}
-			_strncpy(val, environ[i] + var_length + 1, val_length);
+			_strncpy(val, env[i] + var_length + 1, val_length);
 			val[val_length] = '\0';
 			free(var);
 			return (val);
@@ -122,7 +103,7 @@ char *_getenv2(char *name)
  *
  * Return: 0 on success, -1 on failure
  */
-int _setenv(char *name, char *value, int overwrite)
+int _setenv(char *name, char *value, int overwrite, char **env)
 {
 	size_t name_l, value_l, total_l;
 	char *new_env, *p;
@@ -133,7 +114,7 @@ int _setenv(char *name, char *value, int overwrite)
 		perror("setenv");
 		return (-1);
 	}
-	if (!overwrite && _getenv2(name) != NULL)
+	if (!overwrite && _getenv2(name, env) != NULL)
 		return (0);
 	name_l = _strlen(name);
 	if (value)

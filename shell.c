@@ -11,7 +11,7 @@ int main(int argc, char *argv[], char *env[])
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1, bst, i;
+	int process_number = 1, bst;
 
 	if (argc < 1)
 		return (-1);
@@ -31,21 +31,7 @@ int main(int argc, char *argv[], char *env[])
 			line = NULL;
 			continue;
 		}
-		if (_strcmp(argvv[0], "env") == 0)
-		{
-			for (i = 0; env[i]; i++)
-			{
-				write(STDOUT_FILENO, environ[i], _strlen(env[i]));
-				write(STDOUT_FILENO, "\n", 1);
-			}
-			continue;
-		}
-		if (_strcmp(argvv[0], "exit") == 0)
-		{
-			free(line);
-			_exit(0);
-		}
-		bst = is_builtin(argvv);
+		bst = is_builtin(argvv, env);
 		if (bst == -1)
 			continue;
 		if (stat(argvv[0], &st) == 0)

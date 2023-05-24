@@ -15,6 +15,7 @@ void print_error(char *fname, unsigned int process_number, char *cname)
 	_puts2(fname);
 	_puts2(": ");
 	_puts2(number);
+	free(number);
 	_puts2(": ");
 	_puts2(cname);
 	_puts2(": ");

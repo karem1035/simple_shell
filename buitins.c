@@ -5,10 +5,10 @@
  * @argvv: array of tokenized command
  * Return: 0 if success, -1 if failure
  */
-int _CD(char *argvv[])
+int _CD(char *argvv[], char **env)
 {
 	int i, argcc = 0, result;
-	char *o_PWD = _getenv2("OLDPWD"), *cwd = NULL;
+	char *o_PWD = _getenv("OLDPWD", env), *cwd = NULL;
 
 	for (i = 0; argvv[i]; i++)
 		argcc++;
@@ -18,10 +18,10 @@ int _CD(char *argvv[])
 		return (-1); /*this means the function fails ya karim */
 	}
 	if (!o_PWD)
-		o_PWD = _strdup(_getenv2("HOME"));
+		o_PWD = _strdup(_getenv("HOME", env));
 	if (argcc == 1)
 	{
-		result = chdir(_getenv2("HOME"));
+		result = chdir(_getenv("HOME", env));
 	}
 	else if (_strcmp(argvv[1], "-") == 0)
 	{
@@ -43,8 +43,8 @@ int _CD(char *argvv[])
 		perror(argvv[0]);
 		return(-1);
 	}
-	_setenv("OLDPWD", o_PWD, 1);
-	_setenv("PWD", cwd, 1);
+	_setenv("OLDPWD", o_PWD, 1, env);
+	_setenv("PWD", cwd, 1, env);
 
 	free(o_PWD);
 	free(cwd);
@@ -56,13 +56,14 @@ int _CD(char *argvv[])
  * environ and you don't need env argument
  *
  */
-int _ENV(char __attribute__((unused)) *argvv[])
+int _ENV(char __attribute__((unused)) *argvv[], char *env[])
 {
 	int i = 0;
 
-	while (environ[i] != NULL)
+	while (env[i] != NULL)
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
+		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}
 	return(0);
@@ -74,7 +75,7 @@ int _ENV(char __attribute__((unused)) *argvv[])
  * @argvv: array of tokenized command
  * Return: -1 if command is not right
  */
-int MY_EXIT(char *argvv[])
+int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)
 {
 	int status_code;
 	int argcc = 0;

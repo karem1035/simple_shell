@@ -10,7 +10,7 @@
 int _which(char *argvv[], char **env)
 {
 	char *dir = NULL;
-	char *path = _getenv2("PATH");
+	char *path = _getenv("PATH", env);
 	char *token;
 	char delim[] = ":";
 	struct stat sb;

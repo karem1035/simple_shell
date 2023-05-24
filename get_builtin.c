@@ -6,11 +6,12 @@
  * @argvv: tokenized command line
  * Return: 0 if failure, built in functions return value if success
  */
-int is_builtin(char *argvv[])
+int is_builtin(char *argvv[], char **env)
 {
 	bin_cmd bin_cmds[] =
 		{
 			{"cd", _CD},
+			{"env", _ENV},
 			{"exit", MY_EXIT},
 			{NULL, NULL},
 		};
@@ -20,7 +21,7 @@ int is_builtin(char *argvv[])
 	{
 		if (_strcmp(argvv[0], bin_cmds[i].cmd) == 0)
 		{
-			return (bin_cmds[i].function_to_execute_on_cmd(argvv));
+			return (bin_cmds[i].function_to_execute_on_cmd(argvv, env));
 		}
 	}
 	return (0);
