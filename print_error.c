@@ -21,7 +21,7 @@ void print_error(char *fname, unsigned int process_number, char *cname)
 	_puts2(": ");
 	_puts2("not found\n");
 	if (!isatty(0))
-		exit(127);
+		_exit(127);
 }
 /**
  * int_to_str - converts int to char;

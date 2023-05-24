@@ -16,7 +16,7 @@ int _CD(char *argvv[], char **env)
 	if (argcc > 2)
 	{
 		write(STDERR_FILENO, "Usage: exit [DIRECTORY]\n", 24);
-		return (-1); /*this means the function fails ya karim */
+		return (-1);
 	}
 	if (!o_PWD)
 		o_PWD = _strdup(_getenv("HOME", env));
@@ -89,14 +89,14 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)
 	if (argcc > 2 || (argcc == 2 && !is_integer(argvv[1])))
 	{
 		write(STDERR_FILENO, "Usage: exit [status]\n", 21);
-		return (-1); /*this means the function fails ya karim */
-	}				/*elmafrood ba2a y3mel continue fy elloop el2asasya fy shell.c*/
-	/*and free(line) in shell.c at failure*/
+		return (-1);
+	}			
+
 	else if (argcc == 2)
 	{
 		status_code = _atoi(argvv[1]);
 		_exit(status_code);
-		/*you can make the status code an argument it's up to you*/
+	
 	}
 	else
 		_exit(EXIT_SUCCESS);

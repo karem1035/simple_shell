@@ -41,3 +41,21 @@ void freeargvv(char **argvv)
 	free(argvv);
 	argvv = NULL;
 }
+/**
+ * _strncmp - compares the 1st n bytes of 2 strs
+ * @s1: str 1
+ * @s2: str 2
+ * @n: bytes to compare
+ * Return: 0 if success, different chars subtraction if failure
+ */
+int _strncmp(char *s1, char *s2, int n)
+{
+	int i;
+
+	for (i = 0; s1[i] && s2[i] && i < n; i++)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+	}
+	return (0);
+}

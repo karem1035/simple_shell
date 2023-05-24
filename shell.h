@@ -55,6 +55,7 @@ int _setenv(char *name, char *value, int overwrite, char **env);
 int _CD(char *argvv[], char **env);
 int is_builtin(char *argvv[], char **env);
 void freeargvv(char **argvv);
+int _strncmp(char *s1, char *s2, int n);
 
 #define MAX_TOKENS 20
 #endif
