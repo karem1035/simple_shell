@@ -12,7 +12,7 @@ int main(int argc, char *argv[], char *env[])
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1;
+	int process_number = 1, i;
 
 	if (argc < 1)
 		return (-1);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char *env[])
         	{
 			for (i = 0; env[i]; i++)
        	     		{
-				write(STDOUT_FILENO, environ[i], _strlen(env[i]));
+				write(STDOUT_FILENO, env[i], _strlen(env[i]));
 				write(STDOUT_FILENO, "\n", 1);
 			}
             		continue;
