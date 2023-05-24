@@ -59,17 +59,15 @@ int _CD(char *argvv[], char **env, char __attribute__((unused)) *line)
  * @line: a line to be freed.
  * Return: 0 always
  */
-int _ENV(char __attribute__((unused)) *argvv[], char *env[], char *line)
+void _ENV(char **env)
 {
-	int i = 0;
-	(void) line;
-	while (env[i] != NULL)
+	int i;
+
+	for (i = 0; env[i]; i++)
 	{
 		write(STDOUT_FILENO, env[i], _strlen(env[i]));
 		write(STDOUT_FILENO, "\n", 1);
-		i++;
 	}
-	return (0);
 }
 /**
  * MY_EXIT - after checking if the command is a built_in

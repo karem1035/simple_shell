@@ -11,7 +11,7 @@ int main(int argc, char *argv[], char *env[])
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1, i;
+	int process_number = 1;
 
 	if (argc < 1)
 		return (-1);
@@ -28,16 +28,11 @@ int main(int argc, char *argv[], char *env[])
 		if (!tokenize(line, argvv))
 		{
 			free(line);
-			line = NULL;
 			continue;
 		}
 		if (_strcmp(argvv[0], "env") == 0)
 		{
-			for (i = 0; env[i]; i++)
-			{
-				write(STDOUT_FILENO, env[i], _strlen(env[i]));
-				write(STDOUT_FILENO, "\n", 1);
-			}
+			_ENV(env);
 			continue;
 		}
 		if (_strcmp(argvv[0], "exit") == 0)
@@ -52,20 +47,19 @@ int main(int argc, char *argv[], char *env[])
 			print_error(argv[0], process_number, argvv[0]);
 			continue;
 		}
-		free(line);
-		line = NULL;
-		buffer_size = 0;
-		process_number++;
+		reset_bufsize_inc_pnum(&buffer_size, &process_number, line);
 	}
 	return (0);
 }
+
 /**
- * freeline - frees the line.
- * @line: the line.
- * Return: void.
+ * reset_bufsize_inc_pnum - reset_bufsize_inc_pnum
+ * @buffer_size: buffer_size
+ * @pnum: process number
  */
-void freeline(char **line)
+void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum, char *line)
 {
-	free(*line);
-	*line = NULL;
+	*buffer_size = 0;
+	*pnum = *pnum + 1;
+	free(line);
 }

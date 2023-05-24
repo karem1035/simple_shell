@@ -37,14 +37,13 @@ unsigned int val_len(char *environ_i);
 int _strcmp(char *s1, char *s2);
 char *_getenv(char *name, char *env[]);
 char *_getenv2(char *name, char *env[]);
-void freeline(char **line);
 int if_exit(char *argvv);
 char **tokenize(char *line, char *argvv[]);
 void _puts(char *str);
 void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
 void print_error(char *fname, unsigned int pnum, char *cname);
-int _ENV(char __attribute__((unused)) *argvv[], char *env[], char *line);
+void _ENV(char **env);
 int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line);
 int is_integer(char *input);
 int _atoi(char *s);
@@ -53,10 +52,9 @@ char *_strchr(char *s, char c);
 char *_memcpy(char *dest, char *src, unsigned int n);
 int _setenv(char *name, char *value, int overwrite, char **env);
 int _CD(char *argvv[], char **env, char *line);
-int is_builtin(char *argvv[], char **env, char *line);
 void freeargvv(char **argvv);
 int _strncmp(char *s1, char *s2, int n);
-void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum);
+void reset_bufsize_inc_pnum(size_t *buffer_size, int *process_number, char *line);
 
 #define MAX_TOKENS 20
 #endif
