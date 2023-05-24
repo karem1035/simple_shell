@@ -2,6 +2,7 @@
 /**
  * execute - execute programm.
  * @argvv: the commands.
+ * @env: environ array
  * Return: void.
  */
 void execute(char *argvv[], char **env)

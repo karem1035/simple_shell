@@ -30,31 +30,34 @@ unsigned int val_len(char *environ_i)
 /**
  * _getenv - get the environment variable value.
  * @name: name of the variable.
+ * @env: environ array
  * Return: the value.
  */
 char *_getenv(char *name, char *env[])
 {
 	size_t name_len;
+
 	if (!name)
 	{
-		return NULL;
+		return (NULL);
 	}
 
 	name_len = strlen(name);
 
 	for (; *env; ++env)
 	{
-		if (_strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
+		if (strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
 		{
 			return (*env + name_len + 1);
 		}
 	}
 
-	return NULL;
+	return (NULL);
 }
 /**
  * _getenv2 - get the environment variable value.
  * @name: name of the variable.
+ * @env: environ array
  * Return: the value.
  */
 char *_getenv2(char *name, char *env[])
@@ -100,7 +103,7 @@ char *_getenv2(char *name, char *env[])
  * @name: the name of the environment variable to set
  * @value: the value to set the environment variable to
  * @overwrite: whether to overwrite an existing value for the variable
- *
+ * @env: environ array
  * Return: 0 on success, -1 on failure
  */
 int _setenv(char *name, char *value, int overwrite, char **env)

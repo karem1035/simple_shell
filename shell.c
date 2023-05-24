@@ -3,6 +3,7 @@
  * main - UNIX command line interpreter.
  * @argc: number of arguments.
  * @argv: array of arguments.
+ * @env: environ array
  * Return: 0 all time
  */
 int main(int argc, char *argv[], char *env[])
@@ -11,7 +12,7 @@ int main(int argc, char *argv[], char *env[])
 	size_t buffer_size = 0;
 	ssize_t input_size = 0;
 	struct stat st;
-	int process_number = 1, bst;
+	int process_number = 1;
 
 	if (argc < 1)
 		return (-1);
@@ -25,14 +26,14 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
+		line[input_size - 1] = '\0';
 		if (!tokenize(line, argvv))
 		{
 			free(line);
 			line = NULL;
 			continue;
 		}
-		bst = is_builtin(argvv, env);
-		if (bst == -1)
+		if (is_builtin(argvv, env) == -1)
 			continue;
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);

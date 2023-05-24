@@ -3,6 +3,7 @@
 /**
  * _CD - change current directory to a desired one
  * @argvv: array of tokenized command
+ * @env: environ array
  * Return: 0 if success, -1 if failure
  */
 int _CD(char *argvv[], char **env)
@@ -34,27 +35,27 @@ int _CD(char *argvv[], char **env)
 	if (result != 0)
 	{
 		perror(argvv[0]);
-		return(-1);
+		return (-1);
 	}
-
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 	{
 		perror(argvv[0]);
-		return(-1);
+		return (-1);
 	}
 	_setenv("OLDPWD", o_PWD, 1, env);
 	_setenv("PWD", cwd, 1, env);
-
 	free(o_PWD);
 	free(cwd);
-	return(0);
+	return (0);
 }
 
 /**
  * _ENV - prints environment variables from
  * environ and you don't need env argument
- *
+ * @argvv: array of tokenized command
+ * @env: environ array
+ * Return: 0 always
  */
 int _ENV(char __attribute__((unused)) *argvv[], char *env[])
 {
@@ -66,13 +67,14 @@ int _ENV(char __attribute__((unused)) *argvv[], char *env[])
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 /**
  * MY_EXIT - after checking if the command is a built_in
  *		KARIM should give me tokenized command line to handle
  *		the exit status
  * @argvv: array of tokenized command
+ * @env: environ array
  * Return: -1 if command is not right
  */
 int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)

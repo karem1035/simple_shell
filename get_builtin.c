@@ -4,12 +4,12 @@
  * is_builtin - checks if a command is built in or not and
  *		then gets the suitable functionfor this command
  * @argvv: tokenized command line
+ * @env: environ array
  * Return: 0 if failure, built in functions return value if success
  */
 int is_builtin(char *argvv[], char **env)
 {
-	bin_cmd bin_cmds[] =
-		{
+	bin_cmd bin_cmds[] = {
 			{"cd", _CD},
 			{"env", _ENV},
 			{"exit", MY_EXIT},
