@@ -49,8 +49,8 @@ int main(int argc, char *argv[], char *env[])
 		if (bst == -1)
 			continue;
 		if (stat(argvv[0], &st) == 0)
-			execute(argvv);
-		else if (!_which(argvv))
+			execute(argvv, env);
+		else if (!_which(argvv, env))
 		{
 			print_error(argv[0], process_number, argvv[0]);
 			continue;

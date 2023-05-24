@@ -7,7 +7,7 @@
  * @argvv: list of arguments
  * Return: 1 at success and 0 if failure
  */
-int _which(char *argvv[])
+int _which(char *argvv[], char **env)
 {
 	char *dir = NULL;
 	char *path = _getenv2("PATH");
@@ -31,7 +31,7 @@ int _which(char *argvv[])
 		if (stat(dir, &sb) == 0 && !access(dir, X_OK))
 		{
 			argvv[0] = dir;
-			execute(argvv);
+			execute(argvv, env);
 			free(dir);
 			return (1);
 		}

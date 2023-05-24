@@ -27,12 +27,12 @@ typedef struct built_in_command
 void signalhandler(int n __attribute__((unused)));
 void prompt(void);
 
-void execute(char *argvv[]);
+void execute(char *argvv[], char **env);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 int _strlen(const char *s);
 char *_strcat(char *dest, const char *src);
-int _which(char *argvv[]);
+int _which(char *argvv[], char **env);
 unsigned int var_len(char *environ_i);
 unsigned int val_len(char *environ_i);
 int _strcmp(char *s1, char *s2);
