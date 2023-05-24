@@ -3,13 +3,16 @@
  * tokenize - splits line into tokens according to a delimeter
  * @line: line to split
  * @argvv: array to put the tokens in
+ * @input_size: input_size
  * Return: array of tokens
  */
-char **tokenize(char *line, char *argvv[])
+char **tokenize(char *line, char *argvv[], ssize_t input_size)
 {
-	char *token = strtok(line, " ");
+	char *token;
 	int i = 0;
 
+	line[input_size - 1] = '\0';
+	token = strtok(line, " ");
 	if (!token)
 		return (0);
 
