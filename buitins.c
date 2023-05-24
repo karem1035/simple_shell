@@ -90,13 +90,13 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)
 	{
 		write(STDERR_FILENO, "Usage: exit [status]\n", 21);
 		return (-1);
-	}			
+	}
 
 	else if (argcc == 2)
 	{
 		status_code = _atoi(argvv[1]);
 		_exit(status_code);
-	
+
 	}
 	else
 		_exit(EXIT_SUCCESS);
