@@ -92,10 +92,10 @@ int MY_EXIT(char *argvv[])
 	else if (argcc == 2)
 	{
 		status_code = _atoi(argvv[1]);
-		exit(status_code);
+		_exit(status_code);
 		/*you can make the status code an argument it's up to you*/
 	}
 	else
-		exit(EXIT_SUCCESS);
+		_exit(EXIT_SUCCESS);
 	return (1);
 }

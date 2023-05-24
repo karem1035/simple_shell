@@ -23,3 +23,18 @@ char **tokenize(char *line, char *argvv[])
 
 	return (argvv);
 }
+
+void freeargvv(char **argvv)
+{
+	size_t i;
+
+	if (!argvv)
+		return;
+	for (i = 0; argvv && argvv[i]; i++)
+	{
+		free(argvv[i]);
+		argvv[i] = NULL;
+	}
+	free(argvv);
+	argvv = NULL;
+}

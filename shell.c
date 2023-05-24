@@ -31,11 +31,6 @@ int main(int argc, char *argv[], char *env[])
 			line = NULL;
 			continue;
 		}
-		if (_strcmp(argvv[0], "exit") == 0)
-		{
-			free(line);
-			_exit(0);
-		}
 		if (_strcmp(argvv[0], "env") == 0)
 		{
 			for (i = 0; env[i]; i++)
@@ -44,6 +39,11 @@ int main(int argc, char *argv[], char *env[])
 				write(STDOUT_FILENO, "\n", 1);
 			}
 			continue;
+		}
+		if (_strcmp(argvv[0], "exit") == 0)
+		{
+			free(line);
+			_exit(0);
 		}
 		bst = is_builtin(argvv);
 		if (bst == -1)

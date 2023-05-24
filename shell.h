@@ -55,6 +55,7 @@ char *_memcpy(char *dest, char *src, unsigned int n);
 int _setenv(char *name, char *value, int overwrite);
 int _CD(char *argvv[]);
 int is_builtin(char *argvv[]);
+void freeargvv(char **argvv);
 
 #define MAX_TOKENS 20
 #endif

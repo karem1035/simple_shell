@@ -17,9 +17,10 @@ void execute(char *argvv[])
 	{
 		execve(argvv[0], argvv, environ);
 		perror(argvv[0]);
-		free(argvv);
+		freeargvv(argvv);
 		exit(98);
 	}
 	else
 		wait(&stat);
 }
+/*{}*/
