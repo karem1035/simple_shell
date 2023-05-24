@@ -33,7 +33,7 @@ int main(int argc, char *argv[], char *env[])
 			line = NULL;
 			continue;
 		}
-		if (is_builtin(argvv, env) == -1)
+		if (is_builtin(argvv, env, line) == -1)
 			continue;
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);

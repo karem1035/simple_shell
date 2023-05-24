@@ -4,9 +4,10 @@
  * _CD - change current directory to a desired one
  * @argvv: array of tokenized command
  * @env: environ array
+ * @line: a line to be freed.
  * Return: 0 if success, -1 if failure
  */
-int _CD(char *argvv[], char **env)
+int _CD(char *argvv[], char **env, char __attribute__((unused)) *line)
 {
 	int i, argcc = 0, result;
 	char *o_PWD = _getenv("OLDPWD", env), *cwd = NULL;
@@ -55,12 +56,13 @@ int _CD(char *argvv[], char **env)
  * environ and you don't need env argument
  * @argvv: array of tokenized command
  * @env: environ array
+ * @line: a line to be freed.
  * Return: 0 always
  */
-int _ENV(char __attribute__((unused)) *argvv[], char *env[])
+int _ENV(char __attribute__((unused)) *argvv[], char *env[], char *line)
 {
 	int i = 0;
-
+	(void) line;
 	while (env[i] != NULL)
 	{
 		write(STDOUT_FILENO, env[i], _strlen(env[i]));
@@ -75,9 +77,10 @@ int _ENV(char __attribute__((unused)) *argvv[], char *env[])
  *		the exit status
  * @argvv: array of tokenized command
  * @env: environ array
+ * @line: a line to be freed.
  * Return: -1 if command is not right
  */
-int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)
+int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
 {
 	int status_code;
 	int argcc = 0;
@@ -95,10 +98,14 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env)
 	else if (argcc == 2)
 	{
 		status_code = _atoi(argvv[1]);
+		free(line);
 		_exit(status_code);
 
 	}
 	else
+	{
+		free(line);
 		_exit(EXIT_SUCCESS);
+	}
 	return (1);
 }

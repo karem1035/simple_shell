@@ -5,9 +5,10 @@
  *		then gets the suitable functionfor this command
  * @argvv: tokenized command line
  * @env: environ array
+ * @line: a line to be freed.
  * Return: 0 if failure, built in functions return value if success
  */
-int is_builtin(char *argvv[], char **env)
+int is_builtin(char *argvv[], char **env, char *line)
 {
 	bin_cmd bin_cmds[] = {
 			{"cd", _CD},
@@ -21,7 +22,7 @@ int is_builtin(char *argvv[], char **env)
 	{
 		if (_strcmp(argvv[0], bin_cmds[i].cmd) == 0)
 		{
-			return (bin_cmds[i].function_to_execute_on_cmd(argvv, env));
+			return (bin_cmds[i].function_to_execute_on_cmd(argvv, env, line));
 		}
 	}
 	return (0);
