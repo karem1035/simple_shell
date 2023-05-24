@@ -26,7 +26,12 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
-		if (!tokenize(line, argvv, input_size) || is_builtin(argvv, env, line) == -1)
+		if (!tokenize(line, argvv, input_size))
+		{
+			free(line);
+			continue;
+		}
+		if (is_builtin(argvv, env, line) == -1)
 		{
 			free(line);
 			continue;
