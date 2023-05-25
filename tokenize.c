@@ -3,7 +3,6 @@
  * tokenize - splits line into tokens according to a delimeter
  * @line: line to split
  * @argvv: array to put the tokens in
- * @input_size: input_size
  * Return: array of tokens
  */
 char **tokenize(char *line, char *argvv[])

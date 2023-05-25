@@ -42,6 +42,7 @@ int if_exit(char *argvv);
 char **tokenize(char *line, char *argvv[]);
 void _puts(char *str);
 void _puts2(char *str);
+int check_function(char **argvv, char *line, char **env);
 char *int_to_str(unsigned int a, char *str);
 void print_error(char *fname, unsigned int pnum, char *cname);
 int _ENV(char *env[]);
