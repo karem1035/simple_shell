@@ -31,10 +31,8 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			continue;
 		}
-		
-		if (check_function(argvv[0]))
+		if (check_function(argvv[0], line, env))
 			continue;
-		
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
 		else if (!_which(argvv, env))
