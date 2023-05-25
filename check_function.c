@@ -14,6 +14,6 @@ int check_function(char **argvv, char *line, char **env)
 	{
 		_ENV(env);
 		return (1);
-		}
+	}
 	return (0);
 }

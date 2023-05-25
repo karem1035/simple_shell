@@ -16,10 +16,12 @@ void execute(char *argvv[], char **env)
 
 	if (pid == 0)
 	{
-		execve(argvv[0], argvv, env);
-		perror(argvv[0]);
-		freeargvv(argvv);
-		exit(98);
+		if (execve(argvv[0], argvv, env) == -1)
+		{
+			perror(argvv[0]);
+			freeargvv(argvv);
+			exit(127);
+		}
 	}
 	else
 		wait(&stat);
