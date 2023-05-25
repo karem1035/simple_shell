@@ -26,9 +26,11 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
-		if (!tokenize(line, argvv, input_size))
+		line[input_size - 1] = '\0';
+		if (!tokenize(line, argvv))
 		{
 			free(line);
+			line = NULL;
 			continue;
 		}
 		if (_strcmp(argvv[0], "env") == 0)
@@ -46,6 +48,7 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		reset_bufsize_pnum(&buffer_size, &process_number, line);
+
 	}
 	return (0);
 }

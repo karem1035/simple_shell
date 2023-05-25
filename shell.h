@@ -39,7 +39,7 @@ char *_getenv(char *name, char *env[]);
 char *_getenv2(char *name, char *env[]);
 void freeline(char **line);
 int if_exit(char *argvv);
-char **tokenize(char *line, char *argvv[], ssize_t input_size);
+char **tokenize(char *line, char *argvv[]);
 void _puts(char *str);
 void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
