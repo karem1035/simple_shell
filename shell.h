@@ -36,7 +36,6 @@ char *_strcat(char *dest, const char *src);
 int _which(char *argvv[], char **env);
 unsigned int var_len(char *environ_i);
 unsigned int val_len(char *environ_i);
-int check_function(char *cmd, char *line, char **env);
 int _strcmp(char *s1, char *s2);
 char *_getenv(char *name, char *env[]);
 char *_getenv2(char *name, char *env[]);

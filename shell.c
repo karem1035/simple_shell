@@ -31,8 +31,13 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			continue;
 		}
-		if (check_function(argvv[0], line, env))
+		if (_strcmp(argvv[0], "env") == 0)
+		{
+			_ENV(env);
 			continue;
+		}
+		if (_strcmp(argvv[0], "exit") == 0)
+			my_exit2(line);
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
 		else if (!_which(argvv, env))
