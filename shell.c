@@ -26,7 +26,7 @@ int main(int argc, char *argv[], char *env[])
 			free(line);
 			break;
 		}
-		if (!tokenize(line, argvv))
+		if (!tokenize(line, argvv, input_size))
 		{
 			free(line);
 			continue;

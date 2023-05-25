@@ -40,7 +40,7 @@ int _strcmp(char *s1, char *s2);
 char *_getenv(char *name, char *env[]);
 char *_getenv2(char *name, char *env[]);
 int if_exit(char *argvv);
-char **tokenize(char *line, char *argvv[]);
+char **tokenize(char *line, char **argvv, ssize_t line_size);
 void _puts(char *str);
 void _puts2(char *str);
 char *int_to_str(unsigned int a, char *str);
