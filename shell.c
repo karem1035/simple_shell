@@ -3,6 +3,7 @@
  * main - UNIX command line interpreter.
  * @argc: number of arguments.
  * @argv: array of arguments.
+ * @env: environmental array.
  * Return: 0 all time
  */
 int main(int argc, char *argv[], char *env[])
@@ -36,10 +37,7 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		if (_strcmp(argvv[0], "exit") == 0)
-		{
-			free(line);
-			_exit(0);
-		}
+			my_exit2(line);
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
 		else if (!_which(argvv, env))
@@ -47,17 +45,18 @@ int main(int argc, char *argv[], char *env[])
 			print_error(argv[0], process_number, argvv[0]);
 			continue;
 		}
-		reset_bufsize_inc_pnum(&buffer_size, &process_number, line);
+		reset_bufsize_pnum(&buffer_size, &process_number, line);
 	}
 	return (0);
 }
 
 /**
- * reset_bufsize_inc_pnum - reset_bufsize_inc_pnum
+ * reset_bufsize_pnum - reset_bufsize_inc_pnum
  * @buffer_size: buffer_size
+ * @line: line to be freed.
  * @pnum: process number
  */
-void reset_bufsize_inc_pnum(size_t *buffer_size, int *pnum, char *line)
+void reset_bufsize_pnum(size_t *buffer_size, int *pnum, char *line)
 {
 	*buffer_size = 0;
 	*pnum = *pnum + 1;

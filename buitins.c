@@ -1,62 +1,9 @@
 #include "shell.h"
 
 /**
- * _CD - change current directory to a desired one
- * @argvv: array of tokenized command
- * @env: environ array
- * @line: a line to be freed.
- * Return: 0 if success, -1 if failure
- */
-int _CD(char *argvv[], char **env, char __attribute__((unused)) *line)
-{
-	int i, argcc = 0, result;
-	char *o_PWD = _getenv("OLDPWD", env), *cwd = NULL;
-
-	for (i = 0; argvv[i]; i++)
-		argcc++;
-	if (argcc > 2)
-	{
-		write(STDERR_FILENO, "Usage: exit [DIRECTORY]\n", 24);
-		return (-1);
-	}
-	if (!o_PWD)
-		o_PWD = _strdup(_getenv("HOME", env));
-	if (argcc == 1)
-	{
-		result = chdir(_getenv("HOME", env));
-	}
-	else if (_strcmp(argvv[1], "-") == 0)
-	{
-		result = chdir(o_PWD);
-		write(STDOUT_FILENO, o_PWD, _strlen(o_PWD));
-		write(STDOUT_FILENO, "\n", 1);
-	}
-	else
-		result = chdir(argvv[1]);
-	if (result != 0)
-	{
-		perror(argvv[0]);
-		return (-1);
-	}
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-	{
-		perror(argvv[0]);
-		return (-1);
-	}
-	_setenv("OLDPWD", o_PWD, 1, env);
-	_setenv("PWD", cwd, 1, env);
-	free(o_PWD);
-	free(cwd);
-	return (0);
-}
-
-/**
  * _ENV - prints environment variables from
  * environ and you don't need env argument
- * @argvv: array of tokenized command
  * @env: environ array
- * @line: a line to be freed.
  * Return: 0 always
  */
 void _ENV(char **env)
@@ -106,4 +53,14 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
 		_exit(EXIT_SUCCESS);
 	}
 	return (1);
+}
+/**
+ * my_exit2 - exits the shell.
+ * @line: line to be freed.
+ * Return: Void.
+*/
+void my_exit2(char *line)
+{
+	(void) line;
+	_exit(0);
 }

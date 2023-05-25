@@ -23,6 +23,8 @@ typedef struct built_in_command
 } bin_cmd;
 
 
+void my_exit2(char *line);
+
 void signalhandler(int n __attribute__((unused)));
 void prompt(void);
 
@@ -54,7 +56,7 @@ int _setenv(char *name, char *value, int overwrite, char **env);
 int _CD(char *argvv[], char **env, char *line);
 void freeargvv(char **argvv);
 int _strncmp(char *s1, char *s2, int n);
-void reset_bufsize_inc_pnum(size_t *buffer_size, int *process_number, char *line);
+void reset_bufsize_pnum(size_t *buffer_size, int *process_number, char *line);
 
 #define MAX_TOKENS 20
 #endif
