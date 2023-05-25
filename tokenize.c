@@ -6,12 +6,11 @@
  * @line_size: the line size.
  * Return: array of tokens
  */
-char **tokenize(char *line, char **argvv, ssize_t line_size)
+char **tokenize(char *line, char **argvv)
 {
 	char *token = strtok(line, " ");
 	int i = 0;
 
-	line[line_size - 1] = '\0';
 	if (!token)
 		return (0);
 
