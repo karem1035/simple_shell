@@ -61,6 +61,6 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
 */
 void my_exit2(char *line)
 {
-	(void) line;
+	free(line);
 	_exit(0);
 }
