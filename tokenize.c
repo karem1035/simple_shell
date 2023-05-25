@@ -5,11 +5,12 @@
  * @argvv: array to put the tokens in
  * Return: array of tokens
  */
-char **tokenize(char *line, char *argvv[])
+char **tokenize(char *line, char *argvv[], ssize_t input_size)
 {
 	char *token = strtok(line, " ");
 	int i = 0;
 
+	line[input_size - 1] = '\0';
 	if (!token)
 		return (0);
 

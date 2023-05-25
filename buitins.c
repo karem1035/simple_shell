@@ -2,7 +2,6 @@
 /**
  * _ENV - prints environment variables from
  * environ and you don't need env argument
- * @argvv: array of tokenized command
  * @env: environ array
  * Return: 0 always
  */
@@ -24,6 +23,7 @@ int _ENV(char *env[])
  *		the exit status
  * @argvv: array of tokenized command
  * @env: environ array
+ * @line: command line
  * Return: -1 if command is not right
  */
 int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
