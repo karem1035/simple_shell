@@ -3,7 +3,7 @@
  * main - UNIX command line interpreter.
  * @argc: number of arguments.
  * @argv: array of arguments.
- * @env: environmental array.
+ * @env: environ array
  * Return: 0 all time
  */
 int main(int argc, char *argv[], char *env[])
@@ -30,6 +30,7 @@ int main(int argc, char *argv[], char *env[])
 		if (!tokenize(line, argvv))
 		{
 			free(line);
+			line = NULL;
 			continue;
 		}
 		if (_strcmp(argvv[0], "env") == 0)
@@ -38,7 +39,7 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		if (_strcmp(argvv[0], "exit") == 0)
-			my_exit2(line);
+			MY_EXIT(argvv, env, line);
 		if (stat(argvv[0], &st) == 0)
 			execute(argvv, env);
 		else if (!_which(argvv, env))
@@ -47,10 +48,10 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		reset_bufsize_pnum(&buffer_size, &process_number, line);
+
 	}
 	return (0);
 }
-
 /**
  * reset_bufsize_pnum - reset_bufsize_inc_pnum
  * @buffer_size: buffer_size

@@ -24,3 +24,4 @@ void execute(char *argvv[], char **env)
 	else
 		wait(&stat);
 }
+/*{}*/

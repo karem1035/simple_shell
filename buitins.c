@@ -1,20 +1,22 @@
 #include "shell.h"
-
 /**
  * _ENV - prints environment variables from
  * environ and you don't need env argument
+ * @argvv: array of tokenized command
  * @env: environ array
  * Return: 0 always
  */
-void _ENV(char **env)
+int _ENV(char *env[])
 {
-	int i;
+	int i = 0;
 
-	for (i = 0; env[i]; i++)
+	while (env[i] != NULL)
 	{
 		write(STDOUT_FILENO, env[i], _strlen(env[i]));
 		write(STDOUT_FILENO, "\n", 1);
+		i++;
 	}
+	return (0);
 }
 /**
  * MY_EXIT - after checking if the command is a built_in
@@ -22,7 +24,6 @@ void _ENV(char **env)
  *		the exit status
  * @argvv: array of tokenized command
  * @env: environ array
- * @line: a line to be freed.
  * Return: -1 if command is not right
  */
 int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
@@ -53,14 +54,4 @@ int MY_EXIT(char *argvv[], char __attribute__((unused)) **env, char *line)
 		_exit(EXIT_SUCCESS);
 	}
 	return (1);
-}
-/**
- * my_exit2 - exits the shell.
- * @line: line to be freed.
- * Return: Void.
-*/
-void my_exit2(char *line)
-{
-	free(line);
-	_exit(0);
 }

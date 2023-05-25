@@ -3,10 +3,9 @@
  * tokenize - splits line into tokens according to a delimeter
  * @line: line to split
  * @argvv: array to put the tokens in
- * @line_size: the line size.
  * Return: array of tokens
  */
-char **tokenize(char *line, char **argvv)
+char **tokenize(char *line, char *argvv[])
 {
 	char *token = strtok(line, " ");
 	int i = 0;
@@ -25,9 +24,9 @@ char **tokenize(char *line, char **argvv)
 	return (argvv);
 }
 /**
- * freeargvv - fress argvv.
- * @argvv: the array to be freed.
-*/
+ * freeargvv - frees argvv array
+ * @argvv: argvv array
+ */
 void freeargvv(char **argvv)
 {
 	size_t i;
@@ -41,22 +40,4 @@ void freeargvv(char **argvv)
 	}
 	free(argvv);
 	argvv = NULL;
-}
-/**
- * _strncmp - compares the 1st n bytes of 2 strs
- * @s1: str 1
- * @s2: str 2
- * @n: bytes to compare
- * Return: 0 if success, different chars subtraction if failure
- */
-int _strncmp(char *s1, char *s2, int n)
-{
-	int i;
-
-	for (i = 0; s1[i] && s2[i] && i < n; i++)
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-	}
-	return (0);
 }

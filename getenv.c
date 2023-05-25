@@ -46,7 +46,7 @@ char *_getenv(char *name, char *env[])
 
 	for (; *env; ++env)
 	{
-		if (_strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
+		if (strncmp(*env, name, name_len) == 0 && (*env)[name_len] == '=')
 		{
 			return (*env + name_len + 1);
 		}
